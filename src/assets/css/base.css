@@ -1,0 +1,70 @@
+@import '~normalize.css';
+@import '~antd/dist/antd.css';
+
+/* 全局样式 */
+body, html, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, header, menu, section, p, input, td, th, ins {
+  padding: 0;
+  margin: 0;
+}
+body {
+  min-width: 375px;
+}
+
+ul, ol, li {
+  margin-left: 1%;
+  font-size: 15px;
+}
+
+a {
+  color: #666;
+}
+
+a:hover {
+  color: #666;
+  text-decoration: none;
+}
+
+i, em {
+  font-style: normal;
+}
+
+input, textarea, button, select, a {
+  outline: none;
+  border: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+img {
+  border: none;
+  vertical-align: middle;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.wrap-v0 {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.wrap-v1 {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.wrap-v2 {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.wrap-v3 {
+  width: 70%x;
+  margin: 0 auto;
+}

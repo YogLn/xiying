@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { memo, Suspense } from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import { renderRoutes } from 'react-router-config'
 
-function App() {
+import routes from './router'
+
+import Header from '@/components/header';
+import Footer from '@/components/footer';
+
+const App = memo(() => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <BrowserRouter>
+      <Header />
+      <Suspense fallback={<div>加载中...</div>}>{renderRoutes(routes)}</Suspense>
+      <Footer/>
+    </BrowserRouter>
+  )
+})
 
-export default App;
+export default App
