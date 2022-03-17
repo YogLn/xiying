@@ -38,7 +38,7 @@ const LoginBox = memo(props => {
         <Form.Item
           label="用户名"
           name="username"
-          rules={[{ required: true, message: 'Please input your username!' }]}
+          rules={[{ required: true, message: '请输入用户名！' }]}
         >
           <Input />
         </Form.Item>
@@ -46,7 +46,7 @@ const LoginBox = memo(props => {
         <Form.Item
           label="密码"
           name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
+          rules={[{ required: true, message: '请输入密码！' }]}
         >
           <Input.Password />
         </Form.Item>

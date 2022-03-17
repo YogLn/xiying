@@ -1,6 +1,7 @@
 import React, { memo, useState } from 'react'
 import { LoginWrapper } from './style'
 
+import { message } from 'antd';
 import LoginBox from '@/components/login-box'
 import { registerRequest } from '@/services/login';
 
@@ -13,8 +14,13 @@ const Login = memo(() => {
     sex: ''
   })
 
-  const handleRegister = () => {
-    registerRequest(registerForm)
+  const handleRegister = async() => {
+    console.log(registerForm)
+    const res = await registerRequest(registerForm)
+    console.log(res);
+    if(res.code === 200) {
+      message.success('注册成功，快去登录吧~')
+    }
   }
 
   return (

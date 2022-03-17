@@ -39,7 +39,6 @@ export const HeaderLeft = styled.div`
     }
     75% {
       transform: translateY(0px);
-      transform: scaleY(1);
     }
     100% {
       transform: translateY(-2px);

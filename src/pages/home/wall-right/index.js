@@ -8,7 +8,7 @@ const Wall = memo(props => {
     <WallWrapper>
       <WallRight>
         {list.map(item => {
-          return <Ablum url={item} />
+          return <Ablum url={item} key={item}/>
         })}
       </WallRight>
       <WallLeft>

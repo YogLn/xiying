@@ -14,7 +14,7 @@ const Wall = memo((props) => {
 			<WallRight>
 				{
 					list.map(item=> {
-						return <Ablum url={item}/>
+						return <Ablum url={item} key={item}/>
 					})
 				}
 			</WallRight>
