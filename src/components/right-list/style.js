@@ -20,13 +20,13 @@ export const RIghtListWrapper = styled.div`
       border-radius: 50%;
       margin: 0 auto;
       border: 3px solid #666;
-      box-shadow: 3px 5px #ccc;
+      cursor: pointer;
     }
     .username {
-      margin-top: 20px;
       font-size: 24px;
       font-weight: bold;
       text-align: center;
+      cursor: pointer;
     }
   }
 
@@ -36,7 +36,6 @@ export const RIghtListWrapper = styled.div`
     .album,
     .help {
       padding-left: 6px;
-      margin: 6px 0;
       font-size: 18px;
       color: #666;
       cursor: pointer;

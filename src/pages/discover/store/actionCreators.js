@@ -34,6 +34,7 @@ export const getPostListAction = (pageNo, pageSize) => {
     })
   }
 }
+
 export const getPostListWithLikeAction = (pageNo, pageSize) => {
   return dispatch => {
     getPostListWithLikeRequest(pageNo, pageSize).then(res => {
@@ -42,6 +43,7 @@ export const getPostListWithLikeAction = (pageNo, pageSize) => {
     })
   }
 }
+
 export const getMyPostListAction = id => {
   return dispatch => {
     getMyPostListRequest(id).then(res => {

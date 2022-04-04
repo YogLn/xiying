@@ -11,7 +11,7 @@ export function getPostListRequest(pageNow = 1, pageSize = 5) {
 }
 export function getPostListWithLikeRequest(pageNow = 1, pageSize = 5) {
   return request({
-    url: '/post/listWithLike',
+    url: '/post/listWithLogin',
     params: {
       pageNow,
       pageSize
@@ -88,5 +88,35 @@ export function deleteCommentRequest(data) {
     url: `/comment`,
     method: 'DELETE',
     data
+  })
+}
+
+
+// 未登录 查询别人
+export function getFavorListRequest(userId) {
+  return request({
+    url: `/post_collection/list/${userId}`
+  })
+}
+
+// 登录 查询自己
+export function getFavorListRequestWithLogin(userId) {
+  return request({
+    url: `/post_collection/listWithLogin/${userId}`
+  })
+}
+
+// 收藏
+export function addFavorLogin(postId) {
+  return request({
+    url: `/post_collection/${postId}`,
+    method: 'POST'
+  })
+}
+// 取消收藏
+export function removeFavorRequest(postId) {
+  return request({
+    url: `/post_collection/${postId}`,
+    method: 'DELETE'
   })
 }

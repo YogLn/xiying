@@ -4,10 +4,11 @@ import { useHistory } from 'react-router-dom'
 import { Popconfirm, message, Divider } from 'antd'
 import {
   LikeTwoTone,
-  DislikeTwoTone,
   MessageTwoTone,
   ClockCircleOutlined,
-  LikeOutlined
+  LikeOutlined,
+  HeartOutlined,
+  HeartTwoTone
 } from '@ant-design/icons'
 import PostImg from '../post-img'
 import Comment from '../comment'
@@ -23,16 +24,19 @@ import {
   deletePostRequest,
   postLikeRequest,
   postCancelLikeRequest,
-  getLikeStatusRequest
+  getLikeStatusRequest,
+  addFavorLogin,
+  removeFavorRequest
 } from '@/services/post'
 import { PostBoxWrapper } from './style'
 
 const PostBox = memo(props => {
   const { content, showComment = false } = props
   const [isLike, setIsLike] = useState(false)
+  const [isFavor, setIsFavor] = useState(content.isCollected)
   const dispatch = useDispatch()
   const history = useHistory()
-  console.log(content);
+
   const avatar = content?.avatar || ''
   const username = content?.username || '匿名用户'
   const loginUsername = window.localStorage.getItem('username')
@@ -44,7 +48,7 @@ const PostBox = memo(props => {
         setIsLike(res.data)
       })
     }
-    if(!showComment) {
+    if (!showComment) {
       setIsLike(content.likeStatus)
     }
   }, [showComment, content.postId, content.likeStatus])
@@ -67,20 +71,30 @@ const PostBox = memo(props => {
   const handleLikeClick = async ({ postId }) => {
     if (isLike) {
       await postCancelLikeRequest({ postId })
-      dispatch(getPostListAction(1, 5))
-      dispatch(getCurrentPost(postId))
       setIsLike(false)
     } else {
       await postLikeRequest({ postId })
-      dispatch(getPostListAction(1, 5))
-      dispatch(getCurrentPost(postId))
       setIsLike(true)
     }
+    dispatch(getPostListAction(1, 5))
+    dispatch(getCurrentPost(postId))
   }
 
   const handleUserClick = () => {
     history.push(`/user/${content.userId}`)
     backTop()
+  }
+
+  const handleFavor = async ({ postId }) => {
+    if (isFavor) {
+      await removeFavorRequest(postId)
+      setIsFavor(false)
+    } else {
+      await addFavorLogin(postId)
+      setIsFavor(true)
+    }
+    dispatch(getPostListAction(1, 5))
+    dispatch(getCurrentPost(postId))
   }
 
   return (
@@ -120,8 +134,12 @@ const PostBox = memo(props => {
           <MessageTwoTone twoToneColor="#52c41a" />
           <span>{content.commentNum}</span>
         </div>
-        <div className="dislike">
-          <DislikeTwoTone twoToneColor="#52c41a" />
+        <div className="favor" onClick={() => handleFavor(content)}>
+          {isFavor ? (
+            <HeartTwoTone twoToneColor="#52c41a" />
+          ) : (
+            <HeartOutlined />
+          )}
         </div>
       </div>
       {showComment && (

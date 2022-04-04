@@ -3,6 +3,7 @@ import { Redirect  } from 'react-router-dom'
 
 const Home = React.lazy(() => import(/*webpackPreFetch: true*/'@/pages/home'))
 const Activity = React.lazy(() => import(/*webpackPreFetch: true*/'@/pages/activity'))
+const ActivityDetail = React.lazy(() => import(/*webpackPreFetch: true*/'@/pages/activity/detail'))
 const Discover = React.lazy(() => import(/*webpackPreFetch: true*/'@/pages/discover'))
 const About = React.lazy(() => import(/*webpackPreFetch: true*/'@/pages/about'))
 const Ranking = React.lazy(() => import(/*webpackPreFetch: true*/'@/pages/ranking'))
@@ -18,6 +19,7 @@ const Detail = React.lazy(() => import(/*webpackPreFetch: true*/'@/pages/discove
 const Album = React.lazy(() => import(/*webpackPreFetch: true*/'@/pages/album'))
 const Photo = React.lazy(() => import(/*webpackPreFetch: true*/'@/pages/photo'))
 const UserPage = React.lazy(() => import(/*webpackPreFetch: true*/'@/pages/user'))
+const Favor = React.lazy(() => import(/*webpackPreFetch: true*/'@/pages/favor'))
 
 const routes = [
 	{
@@ -31,7 +33,12 @@ const routes = [
   },
 	{
     path: '/activity',
+    exact: true,
     component: Activity
+  },
+	{
+    path: '/activity/:id',
+    component: ActivityDetail
   },
 	{
     path: '/discover',
@@ -91,6 +98,10 @@ const routes = [
 	{
     path: '/user/:id',
     component: UserPage
+  },
+	{
+    path: '/favor',
+    component: Favor
   }
 ]
 

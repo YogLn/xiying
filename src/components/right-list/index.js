@@ -30,7 +30,7 @@ const RightList = memo(() => {
         history.push('/my')
         break
       case 'favor':
-        console.log('favor')
+        history.push('/favor')
         break
       case 'album':
         history.push('/album')
@@ -44,10 +44,15 @@ const RightList = memo(() => {
     backTop()
   }
 
+  const getMyPage = () => {
+    const id = window.localStorage.getItem('id')
+    history.push(`user/${id}`)
+  }
+
   return (
     <RIghtListWrapper>
       {username && avatar ? (
-        <div className="info">
+        <div className="info" onClick={() => getMyPage()}>
           <img src={avatar} alt="" />
           <div className="username">{username}</div>
         </div>

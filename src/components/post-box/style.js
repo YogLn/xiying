@@ -7,7 +7,7 @@ export const PostBoxWrapper = styled.div`
 	.top {
 		padding: 20px 20px;
 		display: flex;
-		height: 50px;
+		height: 45px;
 		line-height: 50px;
 		justify-content: space-between;
 		align-items: center;
@@ -62,7 +62,7 @@ export const PostBoxWrapper = styled.div`
 			padding-left: 4px;
 		}
 
-		.like, .dislike, .comment {
+		.like, .favor, .comment {
 			cursor: pointer;
 		}
 	}

@@ -17,8 +17,8 @@ const UserInfo = memo(props => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getPostListByIdAction(userId))
-    dispatch(getUserAlbumAction(userId))
     dispatch(getUserInfoAction(userId))
+    dispatch(getUserAlbumAction(userId))
   }, [userId, dispatch])
 
   const { userInfo, postList, albumList } = useSelector(
