@@ -15,7 +15,6 @@ export const LoginBoxWrapper = styled.div`
 	}
 	.form {
 		margin: 30px 55px 0 0;
-
 		.ant-btn-primary {
 			margin-right: 12px;
 		}

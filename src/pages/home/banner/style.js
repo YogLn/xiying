@@ -2,9 +2,9 @@ import styled from 'styled-components'
 
 export const HeaderWrapper = styled.div`
   .banner {
-		position: relative;
+    position: relative;
     .image {
-      height: 550px;
+      height: calc(100vh - 145px);
       object-fit: cover;
     }
 
@@ -23,20 +23,22 @@ export const HeaderWrapper = styled.div`
     }
 
     .left {
-			top: 50%;
+      top: 50%;
       background-position: 0 -360px;
     }
 
     .right {
       right: 0;
-			top: 50%;
+      top: 50%;
       background-position: 0 -508px;
     }
   }
 
   .desc {
     margin: 30px 0;
+    padding: 0 80px;
     text-align: center;
     letter-spacing: 2px;
+    text-indent: 2em;
   }
 `

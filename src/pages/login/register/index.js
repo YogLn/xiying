@@ -1,4 +1,5 @@
-import React, { memo, useState } from 'react'
+import React, { memo } from 'react'
+import { useHistory } from 'react-router-dom'
 import { LoginWrapper } from './style'
 
 import { message } from 'antd';
@@ -6,27 +7,19 @@ import LoginBox from '@/components/login-box'
 import { registerRequest } from '@/services/login';
 
 const Login = memo(() => {
-  const [registerForm, setRegisterForm]  = useState({
-    username: '',
-    password: '',
-    age: '',
-    phone: '',
-    sex: ''
-  })
-
-  const handleRegister = async() => {
-    console.log(registerForm)
-    const res = await registerRequest(registerForm)
-    console.log(res);
+  const history = useHistory()
+  const handleRegister = async(values) => {
+    const res = await registerRequest(values)
     if(res.code === 200) {
       message.success('注册成功，快去登录吧~')
+      history.push('/login')
     }
   }
 
   return (
     <LoginWrapper>
       <div className="login-box">
-        <LoginBox title="注册账户" setRegisterForm={setRegisterForm} handleRegister={handleRegister}/>
+        <LoginBox title="注册账户" handleRegister={handleRegister}/>
       </div>
     </LoginWrapper>
   )

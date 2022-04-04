@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 
 export const AlbumWrapper = styled.div`
-  width: 300px;
-  height: 300px;
+  width: ${props => props.width};
+  height: ${props => props.width};
+  cursor: pointer;
   display: inline-block;
   position: relative;
-  margin: 1%;
+  margin: 10px 10px 30px;
   padding: 20px;
   background: #fafafa;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
@@ -13,6 +14,17 @@ export const AlbumWrapper = styled.div`
   border-radius: 4px;
   color: rgba(0, 0, 0, 0.8);
   text-shadow: 0 1px 0 #fff;
+
+  .delete {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+  }
+  .private {
+    position: absolute;
+    left: 6px;
+    top: 6px;
+  }
 
   &::before,
   &::after {
@@ -44,5 +56,11 @@ export const AlbumWrapper = styled.div`
     height: 100%;
     object-fit: cover;
     vertical-align: bottom;
+  }
+
+  .name {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 20px;
   }
 `

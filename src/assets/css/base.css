@@ -5,6 +5,7 @@
 body, html, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, header, menu, section, p, input, td, th, ins {
   padding: 0;
   margin: 0;
+  font-family: "Times New Roman", Times, serif;
 }
 body {
   min-width: 375px;
@@ -55,7 +56,7 @@ img {
 }
 
 .wrap-v1 {
-  width: 80%;
+  width: 81%;
   margin: 0 auto;
 }
 

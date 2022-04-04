@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const HeaderWrapper = styled.div`
+  width: 100%;
+  position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,6 +11,9 @@ export const HeaderWrapper = styled.div`
   padding: 10px 20px;
   height: 65px;
   line-height: 65px;
+  margin-top: -65px;
+  background-color: #eeeeee;
+  z-index: 999;
 `
 export const HeaderLeft = styled.div`
   display: flex;
@@ -16,6 +21,17 @@ export const HeaderLeft = styled.div`
   align-items: center;
   .title-left {
     margin: 0 15px 0 20px;
+    color: #888;
+    .item {
+      &:hover {
+        color: #000;
+        font-weight: bold;
+      }
+    }
+    .active {
+      color: #000;
+      font-weight: bold;
+    }
   }
 
   .title {
