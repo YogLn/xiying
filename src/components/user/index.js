@@ -68,11 +68,21 @@ const UserInfo = memo(() => {
     })
   }
 
+  const myPage = () => {
+    const id = window.localStorage.getItem('id')
+    history.push(`user/${id}`)
+  }
+
   const menu = (
     <Menu>
+      <Menu.Item key="my-page">
+        <div className="change-info" onClick={() => myPage()}>
+          个人主页
+        </div>
+      </Menu.Item>
       <Menu.Item key="change-info">
         <div className="change-info" onClick={() => myInfo()}>
-          个人资料
+          修改信息
         </div>
       </Menu.Item>
       <Menu.Item key="change-pwd">

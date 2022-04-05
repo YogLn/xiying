@@ -20,16 +20,10 @@ padding-top: 10px;
 		}
 	}
 
-	.img {
-		width: 90%;
-		height: 350px;
+	.image {
+		width: 400px;
 		margin: 0 auto;
 		margin-top: 40px;
-		img {
-			width: 100%;
-			height: 100%;
-			object-fit: contain;
-		}
 	}
 	.detail {
 		padding: 40px;

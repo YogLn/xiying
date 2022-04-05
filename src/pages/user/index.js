@@ -29,7 +29,6 @@ const UserInfo = memo(props => {
     }),
     shallowEqual
   )
-  console.log(userInfo)
   return (
     <UserWrapper>
       <div className="info">
@@ -37,7 +36,7 @@ const UserInfo = memo(props => {
           <img src={userInfo?.avatar} alt="" />
         </div>
         <div className="right">
-          <div className="name">{userInfo.username}</div>
+          <div className="name">{userInfo?.username}</div>
           <div className="info-detail">
             <div className="age">年龄：{userInfo?.age}</div>
             <div className="sex">性别：{userInfo?.sex === 1 ? '男' : '女'}</div>

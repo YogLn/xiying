@@ -43,7 +43,7 @@ const UploadImg = memo(props => {
     setFileList([...fileList, file])
     handleImgUpload(file)
     setFileList([])
-    setImgList([])
+    // setImgList([])
   }
 
   return (

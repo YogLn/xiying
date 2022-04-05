@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const BoxWrapper = styled.div`
   width: 23%;
-  margin: 0 10px 10px;
+  margin: 0 20px 10px;
   border: 1px solid #ccc;
   padding: 5px 10px;
   cursor: pointer;
@@ -11,7 +11,7 @@ export const BoxWrapper = styled.div`
   transition: all 0.5s;
   &:hover {
     box-shadow: 3px 3px 4px 4px #ccc;
-    transform: translateY(-2px)
+    transform: translateY(-2px);
   }
   .wrapper {
     .top {
@@ -20,14 +20,26 @@ export const BoxWrapper = styled.div`
         text-align: center;
         font-size: 16px;
         font-weight: bold;
+        margin-top: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
-      .status {
+      .status-ing {
         position: absolute;
-        top: -6px;
+        top: -15px;
         right: -10px;
         background-color: #f50000;
-        border-radius: 5px;
+        border-radius: 5px 0 5px 5px;
         color: #fff;
+      }
+      .status-not {
+        position: absolute;
+        top: -15px;
+        right: -10px;
+        background-color: #ccc;
+        border-radius: 5px 0 5px 5px;
+        color: #666;
       }
     }
     .img {

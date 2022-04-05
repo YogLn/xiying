@@ -1,5 +1,7 @@
 import React, { memo, useEffect } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
+import { Image } from 'antd'
+
 import { getActivityDetailAction } from '../store/actionCreator'
 import { formatUtcString } from '@/utils/format'
 import { DetailWrapper } from './style'
@@ -16,12 +18,14 @@ const Detail = memo(props => {
     }),
     shallowEqual
   )
+  let { detail } = content
+  detail = detail?.split('\n')
   return (
     <DetailWrapper>
       <h2 className="title">{content.title}</h2>
       <div className="time">
         <div className="start-time">
-					赞助商：
+          赞助商：
           <span>{content.sponsor}</span>
         </div>
         <div className="start-time">
@@ -33,10 +37,14 @@ const Detail = memo(props => {
           <span>{formatUtcString(content?.endTime, 'YYYY-MM-DD')}</span>
         </div>
       </div>
-      <div className="img">
-        <img src={content.imgUrl} alt="" />
+      <div className="image">
+        <Image src={content.imgUrl} alt="" className="img" />
       </div>
-      <p className="detail">{content.detail}</p>
+      <div className="detail">
+        {detail?.map(item => {
+          return <p key={item}>{item}</p>
+        })}
+      </div>
     </DetailWrapper>
   )
 })

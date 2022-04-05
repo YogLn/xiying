@@ -5,7 +5,7 @@ import { BoxWrapper } from './style'
 
 const Box = memo(props => {
   const { content } = props
-	const history = useHistory()
+  const history = useHistory()
   let activity = '进行中'
   const isStart = timeCompare(
     formatUtcString(getNowTime()),
@@ -21,16 +21,20 @@ const Box = memo(props => {
   if (isStart === -1) {
     activity = '未开始'
   }
-	const handleDetailClick = () => {
-		history.push(`/activity/${content.id}`)
-	}
+  const handleDetailClick = () => {
+    history.push(`/activity/${content.id}`)
+  }
 
   return (
     <BoxWrapper>
       <div className="wrapper" onClick={() => handleDetailClick()}>
         <div className="top">
           <div className="title">{content.title}</div>
-          <div className="status">{activity}</div>
+          {activity === '进行中' ? (
+            <div className="status-ing">{activity}</div>
+          ) : (
+            <div className="status-not">{activity}</div>
+          )}
         </div>
         <div className="img">
           <img src={content.imgUrl} alt="" />
