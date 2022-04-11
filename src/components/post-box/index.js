@@ -41,7 +41,6 @@ const PostBox = memo(props => {
   const username = content?.username || '匿名用户'
   const loginUsername = window.localStorage.getItem('username')
   const id = window.localStorage.getItem('id')
-
   useEffect(() => {
     if (showComment && content.postId) {
       getLikeStatusRequest(content.postId).then(res => {
@@ -49,9 +48,9 @@ const PostBox = memo(props => {
       })
     }
     if (!showComment) {
-      setIsLike(content.likeStatus)
+      setIsLike(content.isLiked)
     }
-  }, [showComment, content.postId, content.likeStatus])
+  }, [showComment, content.postId, content.isLiked])
 
   const handleComment = postId => {
     if (showComment) return

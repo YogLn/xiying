@@ -6,6 +6,7 @@ import { reducer as rankReducer } from '@/pages/ranking/store';
 import { reducer as userReducer } from '@/pages/user/store';
 import { reducer as activityReducer } from '@/pages/activity/store';
 import { reducer as favorReducer } from '@/pages/favor/store';
+import { reducer as chatReducer } from '@/pages/message/store';
 
 const reducer = combineReducers({
 	post: postReducer,
@@ -13,7 +14,8 @@ const reducer = combineReducers({
 	rank: rankReducer,
 	user: userReducer,
 	activity: activityReducer,
-	favor: favorReducer
+	favor: favorReducer,
+	chat: chatReducer
 })
 
 export default reducer

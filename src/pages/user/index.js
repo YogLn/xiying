@@ -1,4 +1,5 @@
 import React, { memo, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 
 import { Tabs } from 'antd'
@@ -13,6 +14,7 @@ import { UserWrapper } from './style'
 
 const UserInfo = memo(props => {
   const userId = props.match.params.id
+  const history = useHistory()
   const { TabPane } = Tabs
   const dispatch = useDispatch()
   useEffect(() => {
@@ -25,10 +27,13 @@ const UserInfo = memo(props => {
     state => ({
       userInfo: state.getIn(['user', 'userInfo']),
       postList: state.getIn(['user', 'postList']),
-      albumList: state.getIn(['user', 'albumList'])
+      albumList: state.getIn(['user', 'albumList']),
     }),
     shallowEqual
   )
+  const handleMessage = () => {
+    history.push({pathname:'/message', state: userInfo})
+  }
   return (
     <UserWrapper>
       <div className="info">
@@ -42,6 +47,7 @@ const UserInfo = memo(props => {
             <div className="sex">性别：{userInfo?.sex === 1 ? '男' : '女'}</div>
             <div className="phone">联系方式：{userInfo?.phone}</div>
           </div>
+          <div className="message" onClick={() => handleMessage()}>私信</div>
         </div>
       </div>
       <Tabs defaultActiveKey="1">

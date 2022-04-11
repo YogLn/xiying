@@ -1,0 +1,1 @@
+export const CHANGE_CHAT_LIST = 'change-chat-list';

@@ -2,10 +2,10 @@ import React, { memo, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { Form, Input, Modal, Menu, Dropdown, Select, message } from 'antd'
+import { MessageTwoTone } from '@ant-design/icons'
 import { getUserInfo, changeUserInfoReq } from '@/services/user'
 import Upload from '../upload'
 import { uploadImg } from '@/utils/upload'
-
 import { UserInfoWrapper } from './style'
 
 const UserInfo = memo(() => {
@@ -33,7 +33,7 @@ const UserInfo = memo(() => {
 
   const changeUserInfo = async url => {
     let obj = { ...userInfo }
-    if(url) {
+    if (url) {
       obj = { ...userInfo, avatar: url }
     }
     const res = await changeUserInfoReq(obj)
@@ -73,6 +73,10 @@ const UserInfo = memo(() => {
     history.push(`user/${id}`)
   }
 
+  const handleMessageClick = () => {
+    history.push('/message')
+  }
+
   const menu = (
     <Menu>
       <Menu.Item key="my-page">
@@ -98,6 +102,7 @@ const UserInfo = memo(() => {
 
   return (
     <UserInfoWrapper>
+      <MessageTwoTone className="message" twoToneColor="#52c41a" onClick={() => handleMessageClick()}/>
       <Dropdown overlay={menu} placement="bottom" arrow>
         <div className="info">
           <img src={avatar} alt="" />

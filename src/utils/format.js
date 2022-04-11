@@ -12,6 +12,10 @@ export function getNowTime() {
   return dayjs()
 }
 
+export function getTime() {
+  return formatUtcString(dayjs())
+}
+
 export function timeCompare(time1, time2) {
   // 当前时间 活动时间
   // 0 进行 -1 结束  1未开始

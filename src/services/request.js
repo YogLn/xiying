@@ -16,10 +16,7 @@ instance.interceptors.request.use(
     val = JSON.parse(val)
     if (val) {
       if (Date.now() - val.time > val.expire) {
-        window.localStorage.removeItem('token')
-        window.localStorage.removeItem('username')
-        window.localStorage.removeItem('avatar')
-        window.localStorage.removeItem('id')
+        window.localStorage.clear()
         window.location.reload()
         return
       }

@@ -20,6 +20,7 @@ const Album = React.lazy(() => import(/*webpackPreFetch: true*/'@/pages/album'))
 const Photo = React.lazy(() => import(/*webpackPreFetch: true*/'@/pages/photo'))
 const UserPage = React.lazy(() => import(/*webpackPreFetch: true*/'@/pages/user'))
 const Favor = React.lazy(() => import(/*webpackPreFetch: true*/'@/pages/favor'))
+const Message = React.lazy(() => import(/*webpackPreFetch: true*/'@/pages/message'))
 
 const routes = [
 	{
@@ -102,6 +103,10 @@ const routes = [
 	{
     path: '/favor',
     component: Favor
+  },
+	{
+    path: '/message',
+    component: Message
   }
 ]
 
