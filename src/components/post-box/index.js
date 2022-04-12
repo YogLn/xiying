@@ -8,7 +8,8 @@ import {
   ClockCircleOutlined,
   LikeOutlined,
   HeartOutlined,
-  HeartTwoTone
+  HeartTwoTone,
+  DeleteTwoTone
 } from '@ant-design/icons'
 import PostImg from '../post-img'
 import Comment from '../comment'
@@ -68,6 +69,9 @@ const PostBox = memo(props => {
   }
 
   const handleLikeClick = async ({ postId }) => {
+    if(!loginUsername) {
+      return message.info('你还没有登录~')
+    }
     if (isLike) {
       await postCancelLikeRequest({ postId })
       setIsLike(false)
@@ -85,6 +89,9 @@ const PostBox = memo(props => {
   }
 
   const handleFavor = async ({ postId }) => {
+    if(!loginUsername) {
+      return message.info('你还没有登录~')
+    }
     if (isFavor) {
       await removeFavorRequest(postId)
       setIsFavor(false)
@@ -113,9 +120,9 @@ const PostBox = memo(props => {
               okText="确认"
               cancelText="取消"
             >
-              <span className="delete">删除</span>
+              <span className="delete"><DeleteTwoTone twoToneColor="#ff0000" /></span>
             </Popconfirm>
-          ) : null}
+          ) : <span className="delete">&nbsp;&nbsp;&nbsp;&nbsp;</span>}
         </div>
       </div>
       <Divider />

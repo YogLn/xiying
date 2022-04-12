@@ -2,6 +2,15 @@ import * as actionTypes from './constants'
 import { getChatListRequest } from '@/services/chat'
 import { storeMessageRequest } from '@/services/message';
 
+const changeChatHistoryList = chatHistoryList => ({
+	type: actionTypes.CHANGE_CHAT_HISTORY_LIST,
+	chatHistoryList
+})
+
+export const changeCurrentObjAction = currentObj => ({
+	type: actionTypes.CHANGE_CURRENT_OBJ,
+	currentObj
+})
 
 export const changeChatListAction = chatList =>({
 	type: actionTypes.CHANGE_CHAT_LIST,
@@ -16,11 +25,10 @@ export const getChatListAction = () => {
 	}
 }
 
-export const getHistoryListAction = () => {
+export const getHistoryListAction = (id) => {
 	return dispatch => {
-		storeMessageRequest().then(res => {
-			console.log(res);
-			// dispatch(changeChatListAction(res.data))
+		storeMessageRequest(id).then(res => {
+			dispatch(changeChatHistoryList(res.data))
 		})
 	}
 }

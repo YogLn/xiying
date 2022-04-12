@@ -2,20 +2,23 @@ import styled from 'styled-components'
 
 export const MessageWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 300px;
-  border: 1px solid #ccc;
+  justify-content: space-around;
+  padding: 0 250px;
+  background-color: #F7F8F9;
 `
 export const MessageLeft = styled.div`
   border: 1px solid #ccc;
   width: 30%;
+  overflow-y: auto;
+  background-color: #fff;
+  
   .user {
-    margin-left: 20px;
-    height: 60px;
+    padding: 20px 0 20px 20px;
+    height: 80px;
     display: flex;
     align-items: center;
     cursor: pointer;
+    border-bottom: 1px solid #ccc;
     .avatar {
       width: 50px;
       height: 50px;
@@ -26,10 +29,14 @@ export const MessageLeft = styled.div`
       margin-left: 10px;
     }
   }
+  .active {
+    background-color: #aae979;
+  }
 `
 export const MessageRight = styled.div`
   width: 65%;
   border: 1px solid #ccc;
+  background-color: #fff;
   .header {
     background-color: #f6f6f6;
     height: 30px;
@@ -50,9 +57,9 @@ export const MessageRight = styled.div`
     }
   }
   .message-list {
-    height: 300px;
+    height: 400px;
     width: 100%;
-    overflow: scroll;
+    overflow-y: auto;
     .message-box {
       display: flex;
       margin: 10px;
@@ -112,6 +119,7 @@ export const MessageRight = styled.div`
     padding: 10px 15px;
     .btn-send {
       margin: 5px 0 0 89%;
+      background-color: #aae979;
     }
   }
 `

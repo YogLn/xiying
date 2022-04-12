@@ -1,15 +1,19 @@
 import React, { memo, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { message, Image } from 'antd'
 import { HeartTwoTone } from '@ant-design/icons'
 import { getRankListAction } from '@/pages/ranking/store/actionCreators';
+import { backTop } from '@/utils/view';
 import { AlbumWrapper } from './style'
 
 const Ablum = memo(props => {
   const { content, handleLike } = props
+  const history = useHistory()
   const dispatch = useDispatch()
   const [showImg, setShowImg] = useState(false)
   const [imgUrl, setImgUrl] = useState(null)
+
   const handleLikeClick = () => {
     const token = window.localStorage.getItem('token')
     if (!token) {
@@ -27,6 +31,11 @@ const Ablum = memo(props => {
     setImgUrl(content.workUrl)
   }
 
+  const handleUserClick = () => {
+    backTop()
+    history.push(`/user/${content.userId}`)
+  }
+
   return (
     <AlbumWrapper>
       <div className="like">
@@ -36,7 +45,7 @@ const Ablum = memo(props => {
         </div>
       </div>
       <img src={content?.workUrl} alt="" onClick={() => handlePreview()} />
-      <div className="info">
+      <div className="info" onClick={() => handleUserClick()}>
         <img src={content?.avatar} alt="" className="avatar" />
         <span className="username">{content?.username}</span>
       </div>

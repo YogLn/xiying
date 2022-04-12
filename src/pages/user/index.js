@@ -1,5 +1,6 @@
 import React, { memo, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { message } from 'antd'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 
 import { Tabs } from 'antd'
@@ -32,6 +33,10 @@ const UserInfo = memo(props => {
     shallowEqual
   )
   const handleMessage = () => {
+    const token = window.localStorage.getItem('token')
+    if(!token) {
+      return message.info('您还没有登录，快去登录吧~')
+    }
     history.push({pathname:'/message', state: userInfo})
   }
   return (
