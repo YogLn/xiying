@@ -1,5 +1,5 @@
 import { Map } from 'immutable'
-import * as actionTypes from './constants';
+import * as actionTypes from './constants'
 
 const initState = Map({
   postList: [],
@@ -15,6 +15,7 @@ function reducer(state = initState, action) {
       return state.set('albumList', action.albumList)
     case actionTypes.CHANGE_USER_INFO:
       return state.set('userInfo', action.userInfo)
+
     default:
       return state
   }

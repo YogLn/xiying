@@ -41,6 +41,7 @@ const PostBox = memo(props => {
   const avatar = content?.avatar || ''
   const username = content?.username || '匿名用户'
   const loginUsername = window.localStorage.getItem('username')
+  const token = window.localStorage.getItem('token')
   const id = window.localStorage.getItem('id')
   useEffect(() => {
     if (showComment && content.postId) {
@@ -69,7 +70,7 @@ const PostBox = memo(props => {
   }
 
   const handleLikeClick = async ({ postId }) => {
-    if(!loginUsername) {
+    if (!token) {
       return message.info('你还没有登录~')
     }
     if (isLike) {
@@ -89,7 +90,7 @@ const PostBox = memo(props => {
   }
 
   const handleFavor = async ({ postId }) => {
-    if(!loginUsername) {
+    if (!token) {
       return message.info('你还没有登录~')
     }
     if (isFavor) {
@@ -120,9 +121,13 @@ const PostBox = memo(props => {
               okText="确认"
               cancelText="取消"
             >
-              <span className="delete"><DeleteTwoTone twoToneColor="#ff0000" /></span>
+              <span className="delete">
+                <DeleteTwoTone twoToneColor="#ff0000" />
+              </span>
             </Popconfirm>
-          ) : <span className="delete">&nbsp;&nbsp;&nbsp;&nbsp;</span>}
+          ) : (
+            <span className="delete">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          )}
         </div>
       </div>
       <Divider />

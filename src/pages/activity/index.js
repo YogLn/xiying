@@ -19,7 +19,7 @@ const Favor = memo(() => {
   return (
     <ActivityWrapper>
       <div className="list">
-        {activityList.map(item => {
+        {activityList?.map(item => {
           return <Box key={item.id} content={item} />
         })}
       </div>

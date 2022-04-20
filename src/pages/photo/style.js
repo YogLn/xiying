@@ -27,8 +27,22 @@ export const PhotoLeft = styled.div`
 
     .image {
       width: 250px;
-      height: 250px;
+      height: 180px;
       margin: 10px;
+      overflow: hidden;
+      position: relative;
+      object-fit: fill;
+      .img {
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+      }
+      .btn-delete {
+        position: absolute;
+        right: 0;
+        top: -15px;
+        cursor: pointer;
+      }
     }
   }
 `

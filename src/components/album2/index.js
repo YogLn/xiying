@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { Popconfirm } from 'antd'
+import { Popconfirm, message } from 'antd'
 import { DeleteTwoTone, EyeInvisibleOutlined } from '@ant-design/icons'
 import { getAlbumWorksAction } from '@/pages/album/store/actionCreator'
 import { AlbumWrapper } from './style'
@@ -15,12 +15,17 @@ const Ablum = memo(props => {
     width = '18.75rem',
     content = '',
     showDelete,
-    handleDeleteAlbum
+    handleDeleteAlbum,
+    userId = window.localStorage.getItem('id')
   } = props
   const handleCoverClick = () => {
+    const token = window.localStorage.getItem('token')
+    if (!token) {
+      return message.info('您还没有登录，快去登录吧~')
+    }
     dispatch(getAlbumWorksAction(content.albumId))
     backTop()
-    history.push(`/photo/${content.albumId}`)
+    history.push({ pathname: `/photo/${content.albumId}`, state: userId })
   }
   const handleDelete = () => {
     handleDeleteAlbum(content.albumId)

@@ -70,7 +70,7 @@ const UserInfo = memo(() => {
 
   const myPage = () => {
     const id = window.localStorage.getItem('id')
-    history.push(`user/${id}`)
+    history.push(`/user/${id}`)
   }
 
   const handleMessageClick = () => {
@@ -102,7 +102,11 @@ const UserInfo = memo(() => {
 
   return (
     <UserInfoWrapper>
-      <MessageTwoTone className="message" twoToneColor="#52c41a" onClick={() => handleMessageClick()}/>
+      <MessageTwoTone
+        className="message"
+        twoToneColor="#52c41a"
+        onClick={() => handleMessageClick()}
+      />
       <Dropdown overlay={menu} placement="bottom" arrow>
         <div className="info">
           <img src={avatar} alt="" />

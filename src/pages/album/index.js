@@ -27,7 +27,6 @@ const AlbumList = memo(() => {
     }),
     shallowEqual
   )
-    console.log(myAlbumList);
   const addAlbum = async url => {
     let obj = { ...albumInfo }
     if (url) {
@@ -53,7 +52,7 @@ const AlbumList = memo(() => {
     setFileList([...fileList, file])
   }
 
-  const handleDeleteAlbum = async (id) => {
+  const handleDeleteAlbum = async id => {
     deleteAlbumRequest(id)
     message.success('删除成功~')
     dispatch(getMyAlbumListAction())

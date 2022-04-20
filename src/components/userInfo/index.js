@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import { useHistory } from 'react-router-dom'
-
+import { HeartTwoTone } from '@ant-design/icons'
 import { UserInfoWrapper } from './style'
 
 const UerInfo = memo(props => {
@@ -10,18 +10,21 @@ const UerInfo = memo(props => {
   const handleUserClick = () => {
     history.push(`/user/${content.id}`)
   }
-  
+
   return (
     <UserInfoWrapper>
-      <div onClick={handleUserClick}>
-        <div className="avatar">
-          <div className="rank">
-            <span>{rank}</span>
-          </div>
-          <img src={content.avatar} alt="" />
+      <div className="avatar" onClick={handleUserClick}>
+        <div className="rank">
+          <span>{rank}</span>
         </div>
-        <hr />
-        <div className="username">{content.username}</div>
+        <img src={content.avatar} alt="" />
+      </div>
+      <div className="username" onClick={handleUserClick}>
+        {content.username}
+      </div>
+      <div className="like">
+        <HeartTwoTone twoToneColor="#ff0000" />
+        <span>{content.likeNum}</span>
       </div>
     </UserInfoWrapper>
   )

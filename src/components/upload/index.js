@@ -39,7 +39,7 @@ const UploadImg = memo(props => {
   const handleChange = ({ fileList, file }) => {
     setImgList(fileList)
   }
-  const imgListUpLoad = (file) => {
+  const imgListUpLoad = file => {
     setFileList([...fileList, file])
     handleImgUpload(file)
     setFileList([])

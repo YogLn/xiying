@@ -129,7 +129,7 @@ const Message = memo(props => {
   return (
     <MessageWrapper>
       <MessageLeft>
-        {chatList.length > 0 ? (
+        {chatList?.length > 0 ? (
           chatList?.map((item, index) => {
             return (
               <div

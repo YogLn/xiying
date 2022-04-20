@@ -1,4 +1,5 @@
 import React, { memo, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { Image } from 'antd'
 
@@ -8,6 +9,7 @@ import { DetailWrapper } from './style'
 
 const Detail = memo(props => {
   const { id } = props.match.params
+  const history = useHistory()
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getActivityDetailAction(id))
@@ -18,15 +20,21 @@ const Detail = memo(props => {
     }),
     shallowEqual
   )
-  let { detail } = content
+  if (!content) return null
+  let { detail = null } = content
   detail = detail?.split('\n')
+
+  const handleJoinActivity = () => {
+    history.push(`/join/${id}`)
+  }
+
   return (
     <DetailWrapper>
       <h2 className="title">{content.title}</h2>
       <div className="time">
         <div className="start-time">
           赞助商：
-          <span>{content.sponsor}</span>
+          <span>{content?.userVo?.username}</span>
         </div>
         <div className="start-time">
           开始时间：
@@ -36,9 +44,12 @@ const Detail = memo(props => {
           结束时间：
           <span>{formatUtcString(content?.endTime, 'YYYY-MM-DD')}</span>
         </div>
+        <div className="join" onClick={() => handleJoinActivity()}>
+          参加活动
+        </div>
       </div>
       <div className="image">
-        <Image src={content.imgUrl} alt="" className="img" />
+        <Image src={content?.imgUrl} alt="" className="img" />
       </div>
       <div className="detail">
         {detail?.map(item => {

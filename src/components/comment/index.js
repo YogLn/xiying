@@ -47,9 +47,12 @@ const PostComment = memo(props => {
     if (username !== item.username) {
       return message.info('您无权删除别人的评论~')
     }
-    console.log(item);
-    const res = await deleteCommentRequest({commentId: item.commentId, postId: item.postId})
-    if(res.code === 200) {
+    console.log(item)
+    const res = await deleteCommentRequest({
+      commentId: item.commentId,
+      postId: item.postId
+    })
+    if (res.code === 200) {
       message.success('删除成功~')
       dispatch(getCurrentPost(postId))
     }

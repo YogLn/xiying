@@ -5,15 +5,15 @@ import COS from 'cos-js-sdk-v5'
 import { Modal, message } from 'antd'
 
 import Upload from '@/components/upload'
-import { addWorkRequest } from '@/services/rank';
+import { addWorkRequest } from '@/services/rank'
 import { getRankListAction } from '../store/actionCreators'
 import { HeaderWrapper } from './style'
 
 const Header = memo(() => {
-	const dispatch = useDispatch()
-	const [fileList, setFileList] = useState([])
+  const dispatch = useDispatch()
+  const [fileList, setFileList] = useState([])
   const [isModalVisible, setIsModalVisible] = useState(false)
-	// 图片上传
+  // 图片上传
   const cos = new COS({
     SecretId: 'AKIDMYUAZgX7SW7TZOvBBuLVO1NSGn31jAKD',
     SecretKey: 'dz4sPecJjslMgkW2HFwNXP0LPChvtafT'
@@ -30,11 +30,13 @@ const Header = memo(() => {
       async (err, data) => {
         // 上传成功之后
         if (data.statusCode === 200) {
-          const res = await addWorkRequest({ workUrl: `https:${data.Location}` })
+          const res = await addWorkRequest({
+            workUrl: `https:${data.Location}`
+          })
           if (res.code === 200) {
             message.success('发布成功~')
             setIsModalVisible(false)
-						dispatch(getRankListAction(1, 10))
+            dispatch(getRankListAction(1, 10))
             setFileList([])
           }
         }
@@ -43,18 +45,19 @@ const Header = memo(() => {
   }
 
   const handleOk = async () => {
-		if (!fileList) return
+    if (!fileList) return
     await uploadImg(fileList[0])
   }
 
-	const handleImgUpload = file => {
+  const handleImgUpload = file => {
     setFileList([...fileList, file])
   }
 
   return (
     <HeaderWrapper>
       <div className="left">
-        <NavLink to="/ranking/work">作品排行</NavLink>
+        <NavLink to="/ranking/work/hot">最热作品排行</NavLink>
+        <NavLink to="/ranking/work/new">最新作品排行</NavLink>
         <NavLink to="/ranking/user">摄影师排行</NavLink>
       </div>
       <div className="right" onClick={() => setIsModalVisible(true)}>
@@ -67,7 +70,7 @@ const Header = memo(() => {
         onOk={handleOk}
         onCancel={() => setIsModalVisible(false)}
       >
-        <Upload handleImgUpload={handleImgUpload}/>
+        <Upload handleImgUpload={handleImgUpload} />
       </Modal>
     </HeaderWrapper>
   )

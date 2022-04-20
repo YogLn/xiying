@@ -5,6 +5,7 @@ export function getUserInfo() {
     url: '/user/curr'
   })
 }
+
 export function changeUserInfoReq(data) {
   return request({
     url: '/user',
@@ -12,13 +13,23 @@ export function changeUserInfoReq(data) {
     data
   })
 }
+
 export function getUserAlbumReq(userId) {
   return request({
-    url: `/album/${userId}`,
+    url: `/album/${userId}`
   })
 }
+
 export function getUserInfoByIdReq(userId) {
   return request({
-    url: `/user/${userId}`,
+    url: `/user/${userId}`
+  })
+}
+
+// 充值
+export function chargeReq(amount) {
+  return request({
+    url: `/user/recharge/${amount}`,
+    method: 'PUT'
   })
 }

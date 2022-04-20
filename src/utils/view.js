@@ -1,5 +1,5 @@
 export function backTop() {
-  var currentScroll =
+  const currentScroll =
     document.documentElement.scrollTop || document.body.scrollTop
   if (currentScroll > 0) {
     // window.requestAnimationFrame(smoothscroll);
@@ -9,13 +9,13 @@ export function backTop() {
 
 export function windowScroll(func) {
   window.onscroll = function () {
-    var scrollTop =
+    const scrollTop =
       document.documentElement.scrollTop || document.body.scrollTop
     //变量windowHeight是可视区的高度
-    var windowHeight =
+    const windowHeight =
       document.documentElement.clientHeight || document.body.clientHeight
     //变量scrollHeight是滚动条的总高度
-    var scrollHeight =
+    const scrollHeight =
       document.documentElement.scrollHeight || document.body.scrollHeight
     //滚动条到底部的条件
     if (scrollTop + windowHeight + 60 > scrollHeight) {
@@ -24,4 +24,3 @@ export function windowScroll(func) {
     }
   }
 }
-

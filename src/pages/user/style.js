@@ -38,7 +38,7 @@ export const UserWrapper = styled.div`
         right: 20px;
         bottom: 20px;
         margin-left: auto;
-        background-color: #62C82F;
+        background-color: #62c82f;
         line-height: 24px;
         padding: 5px 10px;
         color: #fff;
@@ -47,7 +47,58 @@ export const UserWrapper = styled.div`
         letter-spacing: 2px;
 
         &:hover {
-          background-color: #135C01;
+          background-color: #135c01;
+        }
+      }
+      .photo {
+        position: absolute;
+        right: 100px;
+        bottom: 20px;
+        margin-left: auto;
+        background-color: #62c82f;
+        line-height: 24px;
+        padding: 5px 10px;
+        color: #fff;
+        border-radius: 3px;
+        cursor: pointer;
+        letter-spacing: 2px;
+
+        &:hover {
+          background-color: #135c01;
+        }
+      }
+      .message {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        margin-left: auto;
+        background-color: #62c82f;
+        line-height: 24px;
+        padding: 5px 10px;
+        color: #fff;
+        border-radius: 3px;
+        cursor: pointer;
+        letter-spacing: 2px;
+
+        &:hover {
+          background-color: #135c01;
+        }
+      }
+      .charge {
+        position: absolute;
+        right: 100px;
+        bottom: 20px;
+        margin-left: auto;
+        background-color: #62c82f;
+        line-height: 24px;
+        padding: 5px 10px;
+        color: #fff;
+        border-radius: 3px;
+        cursor: pointer;
+        letter-spacing: 2px;
+
+        &:hover {
+          background-color: #135c01;
         }
       }
     }

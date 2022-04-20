@@ -1,6 +1,14 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { message } from 'antd'
+import {
+  message,
+  Modal,
+  Form,
+  Input,
+  DatePicker,
+  TimePicker,
+  notification
+} from 'antd'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 
 import { Tabs } from 'antd'
@@ -11,6 +19,8 @@ import {
   getUserAlbumAction,
   getUserInfoAction
 } from './store/actionCreators'
+import { addOrderRequest } from '@/services/order'
+import { chargeReq } from '@/services/user'
 import { UserWrapper } from './style'
 
 const UserInfo = memo(props => {
@@ -18,6 +28,17 @@ const UserInfo = memo(props => {
   const history = useHistory()
   const { TabPane } = Tabs
   const dispatch = useDispatch()
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [chargeVisible, setChargeVisible] = useState(false)
+  const [charge, setCharge] = useState(0)
+  const [coin, setCoin] = useState(window.localStorage.getItem('coin'))
+
+  // 约拍
+  const id = window.localStorage.getItem('id')
+  const [appointPlace, setAppointPlace] = useState('')
+  const [data, setData] = useState('')
+  const [timeValue, setTimeValue] = useState()
+  const [paymentAmount, setPaymentAmount] = useState()
   useEffect(() => {
     dispatch(getPostListByIdAction(userId))
     dispatch(getUserInfoAction(userId))
@@ -28,17 +49,85 @@ const UserInfo = memo(props => {
     state => ({
       userInfo: state.getIn(['user', 'userInfo']),
       postList: state.getIn(['user', 'postList']),
-      albumList: state.getIn(['user', 'albumList']),
+      albumList: state.getIn(['user', 'albumList'])
     }),
     shallowEqual
   )
   const handleMessage = () => {
     const token = window.localStorage.getItem('token')
-    if(!token) {
+    if (!token) {
       return message.info('您还没有登录，快去登录吧~')
     }
-    history.push({pathname:'/message', state: userInfo})
+    history.push({ pathname: '/message', state: userInfo })
   }
+  const handlePhoto = () => {
+    const token = window.localStorage.getItem('token')
+    if (!token) {
+      return message.info('您还没有登录，快去登录吧~')
+    }
+    setIsModalVisible(true)
+    // history.push('/order')
+  }
+
+  const handleOk = async () => {
+    const res = await addOrderRequest({
+      appointPlace,
+      appointTime: data + ' ' + timeValue,
+      paymentAmount,
+      photographerId: userId,
+      customerId: id
+    })
+    if (res.code === 200) {
+      notification.success({
+        message: '约拍成功，等待摄影师同意',
+        description: '等待摄影师同意'
+      })
+      setIsModalVisible(false)
+    } else {
+      notification.error({
+        message: '约拍失败',
+        description: '余额不足'
+      })
+    }
+  }
+  const handleChange = (e, tag) => {
+    const { value } = e.target
+    const reg = /^-?\d*(\.\d*)?$/
+    if (tag === 'appointPlace') {
+      setAppointPlace(value)
+    } else {
+      if ((!isNaN(value) && reg.test(value)) || value === '' || value === '-') {
+        setPaymentAmount(new Intl.NumberFormat().format(value))
+      }
+    }
+  }
+
+  const handleDataChange = (data, dataString) => {
+    setData(dataString)
+  }
+  const handleTimeChange = (data, dataString) => {
+    setTimeValue(dataString)
+  }
+
+  const handleCharge = e => {
+    const { value } = e.target
+    const reg = /^-?\d*(\.\d*)?$/
+    if ((!isNaN(value) && reg.test(value)) || value === '' || value === '-') {
+      setCharge(new Intl.NumberFormat().format(value))
+    }
+  }
+
+  const handleChargeOk = async () => {
+    const res = await chargeReq(charge)
+    if (res.code === 200) {
+      message.success('充值成功~')
+      const coin = window.localStorage.getItem('coin')
+      window.localStorage.setItem('coin', parseFloat(coin) + parseFloat(charge))
+      setCoin(parseFloat(coin) + parseFloat(charge))
+      setChargeVisible(false)
+    }
+  }
+
   return (
     <UserWrapper>
       <div className="info">
@@ -51,8 +140,21 @@ const UserInfo = memo(props => {
             <div className="age">年龄：{userInfo?.age}</div>
             <div className="sex">性别：{userInfo?.sex === 1 ? '男' : '女'}</div>
             <div className="phone">联系方式：{userInfo?.phone}</div>
+            {userId === id ? <div className="coin">余额：{coin}￥</div> : null}
           </div>
-          <div className="message" onClick={() => handleMessage()}>私信</div>
+          {userId === id ? (
+            <div className="charge" onClick={() => setChargeVisible(true)}>
+              充值
+            </div>
+          ) : (
+            <div className="photo" onClick={() => handlePhoto()}>
+              约拍
+            </div>
+          )}
+
+          <div className="message" onClick={() => handleMessage()}>
+            私信
+          </div>
         </div>
       </div>
       <Tabs defaultActiveKey="1">
@@ -77,6 +179,7 @@ const UserInfo = memo(props => {
                       width="200px"
                       content={item}
                       showDelete={false}
+                      userId={userId}
                     />
                   </div>
                 )
@@ -85,6 +188,66 @@ const UserInfo = memo(props => {
           </div>
         </TabPane>
       </Tabs>
+      <Modal
+        title="填写约拍信息"
+        visible={isModalVisible}
+        onOk={() => handleOk()}
+        onCancel={() => setIsModalVisible(false)}
+      >
+        <Form
+          name="form"
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 16 }}
+          autoComplete="off"
+        >
+          <Form.Item
+            label="约拍地点"
+            rules={[{ required: true, message: '不能为空~' }]}
+          >
+            <Input
+              onChange={e => handleChange(e, 'appointPlace')}
+              value={appointPlace}
+            />
+          </Form.Item>
+
+          <Form.Item
+            label="约拍日期"
+            rules={[{ required: true, message: '不能为空~' }]}
+          >
+            <DatePicker onChange={handleDataChange} />
+          </Form.Item>
+          <Form.Item
+            label="具体时间"
+            rules={[{ required: true, message: '不能为空~' }]}
+          >
+            <TimePicker onChange={handleTimeChange} />
+          </Form.Item>
+          <Form.Item
+            label="约拍金额"
+            rules={[{ required: true, message: '不能为空~' }]}
+          >
+            <Input
+              onChange={e => handleChange(e, 'paymentAmount')}
+              value={paymentAmount}
+              prefix="￥"
+              suffix="RMB"
+            />
+          </Form.Item>
+        </Form>
+      </Modal>
+      <Modal
+        title="充值金额"
+        visible={chargeVisible}
+        onOk={handleChargeOk}
+        onCancel={() => setChargeVisible(false)}
+      >
+        <Input
+          onChange={e => handleCharge(e)}
+          value={charge}
+          prefix="￥"
+          suffix="RMB"
+        />
+      </Modal>
     </UserWrapper>
   )
 })

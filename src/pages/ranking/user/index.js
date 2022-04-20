@@ -18,15 +18,16 @@ const User = memo(() => {
 
   return (
     <UserWrapper>
-      {userList.map((item, index) => {
-        return (
-          <UserInfo
-            content={item}
-            key={item.id}
-            rank={index + 1}
-          />
-        )
-      })}
+      <div className="top">
+        <div className="">用户头像</div>
+        <div className="">用户名</div>
+        <div className="">总作品点赞数</div>
+      </div>
+      <div className="list">
+        {userList.map((item, index) => {
+          return <UserInfo content={item} key={item.id} rank={index + 1} />
+        })}
+      </div>
     </UserWrapper>
   )
 })

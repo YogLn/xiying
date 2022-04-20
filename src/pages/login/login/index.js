@@ -11,11 +11,13 @@ const Login = memo(() => {
 
   const handleLogin = async values => {
     const res = await loginRequest(values)
+    console.log(res)
     if (res.code === 200) {
       message.success('登录成功~')
       window.localStorage.setItem('id', res?.data?.id)
       window.localStorage.setItem('avatar', res?.data?.avatar)
       window.localStorage.setItem('username', res?.data?.username)
+      window.localStorage.setItem('coin', res?.data?.coin)
       let obj = {
         data: res?.data?.token,
         time: Date.now(),

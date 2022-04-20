@@ -28,7 +28,7 @@ export function addPostListRequest(data) {
 }
 export function getPostListByIdRequest(id) {
   return request({
-    url: `/post/${id}`,
+    url: `/post/${id}`
   })
 }
 
@@ -54,6 +54,7 @@ export function addCommentRequest(data) {
     data
   })
 }
+
 export function deletePostRequest(postId) {
   return request({
     url: `/post/${postId}`,
@@ -90,7 +91,6 @@ export function deleteCommentRequest(data) {
     data
   })
 }
-
 
 // 未登录 查询别人
 export function getFavorListRequest(userId) {

@@ -12,8 +12,12 @@ export const headerLeftLinks = [
     link: '/ranking'
   },
   {
-    title: '关于',
-    link: '/about'
+    title: '周边',
+    link: '/mall'
+  },
+  {
+    title: '订单',
+    link: '/order'
   }
 ]
 
@@ -27,7 +31,6 @@ export const headerRightLinks = [
     title: '注册',
     link: '/register',
     className: 'register'
-
   }
 ]
 
@@ -41,7 +44,7 @@ export const avatarList = [
 export const carosoulList = [
   'https://blog-1304388092.cos.ap-chengdu.myqcloud.com/QQ%E6%88%AA%E5%9B%BE20220315230153.png',
   'https://blog-1304388092.cos.ap-chengdu.myqcloud.com/QQ%E6%88%AA%E5%9B%BE20220315230317.png',
-  'https://blog-1304388092.cos.ap-chengdu.myqcloud.com/QQ%E6%88%AA%E5%9B%BE20220315230336.png',
+  'https://blog-1304388092.cos.ap-chengdu.myqcloud.com/QQ%E6%88%AA%E5%9B%BE20220315230336.png'
 ]
 
 export const landscape = [
@@ -60,4 +63,11 @@ export const people = [
   'https://blog-1304388092.cos.ap-chengdu.myqcloud.com/iso-republic-meredith_gabby-walk.jpg',
   'https://blog-1304388092.cos.ap-chengdu.myqcloud.com/iso-republic-meredith_katelyn.jpg',
   'https://blog-1304388092.cos.ap-chengdu.myqcloud.com/iso-republic-su-flowers-spring-portrait-1.jpg'
+]
+
+export const mallBanner = [
+  'https://blog-1304388092.cos.ap-chengdu.myqcloud.com/FhIU0MP283NLOWLkkqcBjWttcwQK.png',
+  'https://blog-1304388092.cos.ap-chengdu.myqcloud.com/FgJN2I5IeyWBWjoYUzojEkE8wi5R.jpg',
+  'https://blog-1304388092.cos.ap-chengdu.myqcloud.com/FoP3KKjoGCHJPRotStbftNmHIyli.jpg',
+  'https://blog-1304388092.cos.ap-chengdu.myqcloud.com/Fqh5Ri5YdtuO4kuOaeHRPi9Y7XzB.jpg'
 ]
