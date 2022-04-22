@@ -15,7 +15,7 @@ const Detail = memo(props => {
   const history = useHistory()
 
   const [num, setNum] = useState(1)
-
+  const coin = window.localStorage.getItem('coin')
   useEffect(() => {
     dispatch(getProductDetailAction(id))
   }, [id, dispatch])
@@ -30,19 +30,25 @@ const Detail = memo(props => {
       if (num === 1) return
       setNum(num - 1)
     } else {
+      if (num === currentPro.stock) return
       setNum(num + 1)
     }
   }
 
   const handleBuy = async () => {
     const res = await buyProductReq({
-      productId: id,
+      productId: parseInt(id),
       productNum: num
     })
-    console.log(res)
     if (res.code === 200) {
       notification.success({
         message: '购买成功'
+      })
+      window.localStorage.setItem('coin', coin - num * currentPro.price)
+    } else {
+      notification.error({
+        message: '购买失败',
+        description: '余额不足'
       })
     }
   }
@@ -89,6 +95,7 @@ const Detail = memo(props => {
           </div>
           <div className="serve">服务：满119包邮 商家发货</div>
           <div className="stock">库存：{currentPro.stock}</div>
+          <div className="all-price">总计：￥{currentPro.price * num}</div>
           <div className="btn-ctl">
             <div className="buy" onClick={() => handleBuy()}>
               立即购买

@@ -41,3 +41,9 @@ export function handleCompleteOrderReq(orderId) {
     method: 'PUT'
   })
 }
+
+export function getMyProductOrderReq() {
+  return request({
+    url: `/productOrder`
+  })
+}

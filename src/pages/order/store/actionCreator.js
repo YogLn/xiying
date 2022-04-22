@@ -1,5 +1,5 @@
 import * as actionTypes from './constants'
-import { getOrderList } from '@/services/order'
+import { getOrderList, getMyProductOrderReq } from '@/services/order'
 
 const changeMyOrderListAction = myOrderList => ({
   type: actionTypes.CHANGE_MY_ORDER_LIST,
@@ -8,6 +8,11 @@ const changeMyOrderListAction = myOrderList => ({
 const changeCusOrderListAction = cusOrderList => ({
   type: actionTypes.CHANGE_CUS_ORDER_LIST,
   cusOrderList
+})
+
+const changeProductListAction = productList => ({
+  type: actionTypes.CHANGE_PRODUCT_ORDER_LIST,
+  productList
 })
 
 export const getOrderListAction = opt => {
@@ -22,6 +27,18 @@ export const getOrderListAction = opt => {
       } else {
         dispatch(changeCusOrderListAction(newList))
       }
+    })
+  }
+}
+
+export const getProductListAction = () => {
+  return dispatch => {
+    getMyProductOrderReq().then(res => {
+      const newList = []
+      for (const item of res.data) {
+        newList.push({ ...item, key: item.id })
+      }
+      dispatch(changeProductListAction(newList))
     })
   }
 }

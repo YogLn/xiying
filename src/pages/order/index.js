@@ -1,12 +1,13 @@
 import React, { memo, useEffect } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { Tabs, Table, Tag, Button, notification } from 'antd'
-import { getOrderListAction } from './store/actionCreator'
+import { getOrderListAction, getProductListAction } from './store/actionCreator'
 import {
   handleOrderReq,
   handleCancelOrderReq,
   handleCompleteOrderReq
 } from '@/services/order'
+import { formatUtcString } from '@/utils/format'
 import { OrderWrapper } from './style'
 
 const About = memo(() => {
@@ -15,12 +16,14 @@ const About = memo(() => {
   useEffect(() => {
     dispatch(getOrderListAction(0)) // 客户
     dispatch(getOrderListAction(1)) // 摄影师
+    dispatch(getProductListAction())
   }, [dispatch])
 
-  const { myOrderList, cusOrderList } = useSelector(
+  const { myOrderList, cusOrderList, productList } = useSelector(
     state => ({
       cusOrderList: state.getIn(['order', 'cusOrderList']),
-      myOrderList: state.getIn(['order', 'myOrderList'])
+      myOrderList: state.getIn(['order', 'myOrderList']),
+      productList: state.getIn(['order', 'productList'])
     }),
     shallowEqual
   )
@@ -36,7 +39,6 @@ const About = memo(() => {
       dispatch(getOrderListAction(1)) // 摄影师
     }
   }
-
   const handleComplete = async ({ id }) => {
     const res = await handleCompleteOrderReq(id)
     console.log(res)
@@ -48,7 +50,6 @@ const About = memo(() => {
       dispatch(getOrderListAction(1)) // 摄影师
     }
   }
-
   const handleClose = async ({ id }) => {
     const res = await handleOrderReq(2, id)
     console.log(res)
@@ -63,7 +64,6 @@ const About = memo(() => {
   }
   const handleAgree = async ({ id }) => {
     const res = await handleOrderReq(1, id)
-    console.log(res)
     if (res.code === 200) {
       notification.success({
         message: '已同意该约拍',
@@ -222,6 +222,47 @@ const About = memo(() => {
     }
   ]
 
+  const ProColumns = [
+    {
+      title: '#',
+      dataIndex: 'index',
+      key: 'index',
+      render: (text, record, index) => index + 1
+    },
+    {
+      title: '订单号',
+      dataIndex: 'id',
+      key: 'id'
+    },
+    {
+      title: '商品名称',
+      dataIndex: 'productVo',
+      key: 'productName',
+      render: productVo => <span>{productVo?.productName}</span>
+    },
+    {
+      title: '商品图片',
+      dataIndex: 'productVo',
+      key: 'urls',
+      render: productVo => <img src={productVo?.urls[0]} alt="" />
+    },
+    {
+      title: '订单状态',
+      dataIndex: 'productVo',
+      key: 'state',
+      render: productVo => {
+        if (productVo.state === 0) return <Tag color="#2db7f5">进行中</Tag>
+        else if (productVo.state === 1) return <Tag color="#f50">已取消</Tag>
+        else return <Tag color="#87d068">已完成</Tag>
+      }
+    },
+    {
+      title: '购买时间',
+      dataIndex: 'createTime',
+      key: 'createTime',
+      render: createTime => <span>{formatUtcString(createTime)}</span>
+    }
+  ]
   return (
     <OrderWrapper>
       <Tabs defaultActiveKey="1">
@@ -239,7 +280,13 @@ const About = memo(() => {
             pagination={false}
           />
         </TabPane>
-        <TabPane tab="商品订单" key="3"></TabPane>
+        <TabPane tab="商品订单" key="3">
+          <Table
+            columns={ProColumns}
+            dataSource={productList}
+            pagination={false}
+          />
+        </TabPane>
       </Tabs>
     </OrderWrapper>
   )

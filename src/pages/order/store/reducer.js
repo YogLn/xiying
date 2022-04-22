@@ -3,7 +3,8 @@ import * as actionTypes from './constants'
 
 const initState = Map({
   cusOrderList: [],
-  myOrderList: []
+  myOrderList: [],
+  productList: []
 })
 
 function reducer(state = initState, action) {
@@ -12,6 +13,8 @@ function reducer(state = initState, action) {
       return state.set('cusOrderList', action.cusOrderList)
     case actionTypes.CHANGE_MY_ORDER_LIST:
       return state.set('myOrderList', action.myOrderList)
+    case actionTypes.CHANGE_PRODUCT_ORDER_LIST:
+      return state.set('productList', action.productList)
     default:
       return state
   }

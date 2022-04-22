@@ -88,6 +88,9 @@ export const DetailWrapper = styled.div`
         color: #666;
         margin-top: 20px;
       }
+      .all-price {
+        font-size: 18px;
+      }
       .btn-ctl {
         display: flex;
         justify-content: space-around;
