@@ -4,8 +4,7 @@ import { Form, Input, Button, Select } from 'antd'
 import { LoginBoxWrapper } from './style'
 
 const LoginBox = memo(props => {
-  const { title, handleRegister, handleLogin } =
-    props
+  const { title, handleRegister, handleLogin } = props
   const { Option } = Select
   const onFinish = values => {
     if (title === '注册账户') {

@@ -33,3 +33,33 @@ export function chargeReq(amount) {
     method: 'PUT'
   })
 }
+// 修改密码
+export function changePwd(data) {
+  return request({
+    url: `/user/pwd`,
+    method: 'PUT',
+    data
+  })
+}
+// 添加地址
+export function addAddressReq(data) {
+  return request({
+    url: `/userAddress`,
+    method: 'POST',
+    data
+  })
+}
+// 修改地址
+export function updateAddressReq(data) {
+  return request({
+    url: `/userAddress`,
+    method: 'PUT',
+    data
+  })
+}
+
+export function getAddressReq() {
+  return request({
+    url: `/userAddress`
+  })
+}

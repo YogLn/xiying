@@ -36,7 +36,7 @@ const Box = memo(props => {
             <div className="status-not">{activity}</div>
           )}
         </div>
-        <div className="img">
+        <div className="image">
           <img src={content.imgUrl} alt="" />
         </div>
         <div className="time">

@@ -1,9 +1,11 @@
 import React, { memo, useRef } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Carousel } from 'antd'
 import { mallBanner } from '@/common/local-data'
 import { BannerWrapper } from './style'
 const Mall = memo(() => {
   const bannerRef = useRef()
+  const history = useHistory()
   return (
     <BannerWrapper>
       <div className="banner">
@@ -30,12 +32,12 @@ const Mall = memo(() => {
           <span>热销爆品</span>
         </div>
         <em className="line"></em>
-        <div className="item">
+        <div className="item" onClick={() => history.push('/shopcart')}>
           <img
             src="https://p4.music.126.net/tKMAm5OvR-2lAj7dnEOhsg==/18623527952924939.jpg"
             alt=""
           />
-          <span>IP周边</span>
+          <span>购物车</span>
         </div>
         <em className="line"></em>
         <div className="item">

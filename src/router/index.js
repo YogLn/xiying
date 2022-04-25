@@ -64,6 +64,9 @@ const Favor = React.lazy(() =>
 const Message = React.lazy(() =>
   import(/*webpackPreFetch: true*/ '@/pages/message')
 )
+const ShopCart = React.lazy(() =>
+  import(/*webpackPreFetch: true*/ '@/pages/mall/shopcart')
+)
 
 const routes = [
   {
@@ -105,6 +108,10 @@ const routes = [
   {
     path: '/mall/:id',
     component: MallDetail
+  },
+  {
+    path: '/shopcart',
+    component: ShopCart
   },
   {
     path: '/ranking',

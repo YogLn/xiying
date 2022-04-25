@@ -5,7 +5,7 @@ import { Carousel, notification } from 'antd'
 import { getProductDetailAction } from '../store/actionCreator'
 import SharePng from '@/assets/img/share.png'
 import AR from '@/assets/img/ar.png'
-import { buyProductReq } from '@/services/mall'
+import { buyProductReq, addShopCartReq } from '@/services/mall'
 import { DetailWrapper } from './style'
 
 const Detail = memo(props => {
@@ -49,6 +49,18 @@ const Detail = memo(props => {
       notification.error({
         message: '购买失败',
         description: '余额不足'
+      })
+    }
+  }
+  const handleAddShopCart = async () => {
+    const res = await addShopCartReq({
+      amount: num,
+      productId: id,
+      totalPrice: currentPro.price * num
+    })
+    if (res.code === 200) {
+      notification.success({
+        message: '已加入购物车'
       })
     }
   }
@@ -100,7 +112,9 @@ const Detail = memo(props => {
             <div className="buy" onClick={() => handleBuy()}>
               立即购买
             </div>
-            <div className="add-shop-cart">加入购物车</div>
+            <div className="add-shop-cart" onClick={() => handleAddShopCart()}>
+              加入购物车
+            </div>
           </div>
         </div>
       </div>

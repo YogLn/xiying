@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import { useHistory } from 'react-router-dom'
+import { backTop } from '@/utils/view'
 import { BoxWrapper } from './style'
 
 const Box = memo(props => {
@@ -9,6 +10,7 @@ const Box = memo(props => {
   const handleDetail = () => {
     const { id } = content
     history.push(`/mall/${id}`)
+    backTop()
   }
 
   return (

@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 
 export const BoxWrapper = styled.div`
-  width: 265px;
+  width: 255px;
   margin: 10px;
   cursor: pointer;
   .image {
-    width: 260px;
-    height: 260px;
+    width: 250px;
+    height: 250px;
     background-color: #f9f9f9;
     img {
       width: 100%;

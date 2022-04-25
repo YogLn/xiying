@@ -19,7 +19,7 @@ export const getOrderListAction = opt => {
   return dispatch => {
     getOrderList(opt).then(res => {
       const newList = []
-      for (const item of res.data) {
+      for (const item of res?.data) {
         newList.push({ ...item, key: item.id })
       }
       if (opt === 1) {
@@ -35,7 +35,7 @@ export const getProductListAction = () => {
   return dispatch => {
     getMyProductOrderReq().then(res => {
       const newList = []
-      for (const item of res.data) {
+      for (const item of res?.data) {
         newList.push({ ...item, key: item.id })
       }
       dispatch(changeProductListAction(newList))

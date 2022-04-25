@@ -11,7 +11,6 @@ const Login = memo(() => {
 
   const handleLogin = async values => {
     const res = await loginRequest(values)
-    console.log(res)
     if (res.code === 200) {
       message.success('登录成功~')
       window.localStorage.setItem('id', res?.data?.id)

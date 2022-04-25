@@ -30,7 +30,6 @@ const About = memo(() => {
 
   const handleCancel = async ({ id }) => {
     const res = await handleCancelOrderReq(id)
-    console.log(res)
     if (res.code === 200) {
       notification.success({
         message: '已取消订单'
@@ -41,7 +40,6 @@ const About = memo(() => {
   }
   const handleComplete = async ({ id }) => {
     const res = await handleCompleteOrderReq(id)
-    console.log(res)
     if (res.code === 200) {
       notification.success({
         message: '订单完成'
@@ -52,7 +50,6 @@ const About = memo(() => {
   }
   const handleClose = async ({ id }) => {
     const res = await handleOrderReq(2, id)
-    console.log(res)
     if (res.code === 200) {
       notification.success({
         message: '已同意该约拍',
@@ -143,7 +140,7 @@ const About = memo(() => {
             </div>
           )
         } else {
-          return <span>订单完成</span>
+          return <span>订单结束</span>
         }
       }
     }

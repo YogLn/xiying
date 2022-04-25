@@ -5,7 +5,8 @@ const initState = Map({
   caramelList: [],
   photoList: [],
   teachList: [],
-  currentPro: {}
+  currentPro: {},
+  shopCart: []
 })
 
 function reducer(state = initState, action) {
@@ -18,6 +19,8 @@ function reducer(state = initState, action) {
       return state.set('teachList', action.teachList)
     case actionTypes.CHANGE_CURRENT_PRODUCT:
       return state.set('currentPro', action.currentPro)
+    case actionTypes.CHANGE_SHOP_CART:
+      return state.set('shopCart', action.shopCart)
     default:
       return state
   }

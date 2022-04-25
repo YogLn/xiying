@@ -1,5 +1,9 @@
 import * as actionTypes from './constants'
-import { getProductListReq, getProductDetailReq } from '@/services/mall'
+import {
+  getProductListReq,
+  getProductDetailReq,
+  getShopCartReq
+} from '@/services/mall'
 
 const changeCaramelListAction = caramelList => ({
   type: actionTypes.CHANGE_CARAMEL_LIST,
@@ -21,6 +25,11 @@ const changeCurrentProAction = currentPro => ({
   currentPro
 })
 
+const changeShopCartAction = shopCart => ({
+  type: actionTypes.CHANGE_SHOP_CART,
+  shopCart
+})
+
 export const getCaramelListAction = opt => {
   return dispatch => {
     getProductListReq(opt).then(res => {
@@ -39,6 +48,18 @@ export const getProductDetailAction = id => {
   return dispatch => {
     getProductDetailReq(id).then(res => {
       dispatch(changeCurrentProAction(res.data))
+    })
+  }
+}
+
+export const getShopCartListAction = () => {
+  return dispatch => {
+    getShopCartReq().then(res => {
+      const newList = []
+      for (const item of res?.data) {
+        newList.push({ ...item, key: item.id })
+      }
+      dispatch(changeShopCartAction(newList))
     })
   }
 }

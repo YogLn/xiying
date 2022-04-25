@@ -16,6 +16,7 @@ const Ablum = memo(props => {
 
   const handleLikeClick = () => {
     const token = window.localStorage.getItem('token')
+
     if (!token) {
       return message.error('您还没有登录~')
     }
