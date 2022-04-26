@@ -73,6 +73,7 @@ const Photo = memo(props => {
             albumWorks.map(item => {
               return (
                 <div className="image" key={item.workId}>
+                  <Image src={item.url} className="img" alt="" />
                   <Popconfirm
                     title="确认删除该照片吗？"
                     onConfirm={() => handleDeleteClick(item)}
@@ -84,7 +85,6 @@ const Photo = memo(props => {
                       twoToneColor="#ff0000"
                     />
                   </Popconfirm>
-                  <Image src={item.url} className="img" />
                 </div>
               )
             })

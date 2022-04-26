@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const PhotoWrapper = styled.div`
-  padding: 0 180px;
+  padding: 0 12%;
   display: flex;
   justify-content: space-between;
 `
@@ -26,21 +26,20 @@ export const PhotoLeft = styled.div`
     }
 
     .image {
-      width: 250px;
-      height: 180px;
+      width: 20%;
       margin: 10px;
       overflow: hidden;
       position: relative;
       object-fit: fill;
       .img {
         width: 100%;
-        height: 100%;
+        height: 160px;
         object-fit: fill;
       }
       .btn-delete {
         position: absolute;
         right: 0;
-        top: -15px;
+        /* top: -15px; */
         cursor: pointer;
       }
     }

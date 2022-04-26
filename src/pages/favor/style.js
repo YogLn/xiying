@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const FavorWrapper = styled.div`
-  padding: 0 200px;
+  padding: 0 13%;
   display: flex;
   justify-content: space-between;
 `

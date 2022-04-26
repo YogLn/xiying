@@ -3,15 +3,15 @@ import styled from 'styled-components'
 export const MessageWrapper = styled.div`
   display: flex;
   justify-content: space-around;
-  padding: 0 250px;
-  background-color: #F7F8F9;
+  padding: 0 16%;
+  background-color: #f7f8f9;
 `
 export const MessageLeft = styled.div`
   border: 1px solid #ccc;
   width: 30%;
   overflow-y: auto;
   background-color: #fff;
-  
+
   .user {
     padding: 20px 0 20px 20px;
     height: 80px;
