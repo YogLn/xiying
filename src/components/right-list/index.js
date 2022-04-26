@@ -2,12 +2,11 @@ import React, { memo } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { Divider, message } from 'antd'
-import { backTop } from '@/utils/view';
+import { backTop } from '@/utils/view'
 import {
   SmileTwoTone,
   HeartTwoTone,
   FileImageTwoTone,
-  CustomerServiceTwoTone,
   ClockCircleTwoTone
 } from '@ant-design/icons'
 import { RIghtListWrapper } from './style'
@@ -19,7 +18,7 @@ const RightList = memo(() => {
 
   const handleTabClick = tag => {
     const token = window.localStorage.getItem('token')
-    if(!token) {
+    if (!token) {
       return message.error('您还没有登录~')
     }
     switch (tag) {
@@ -79,11 +78,6 @@ const RightList = memo(() => {
         <div className="album" onClick={e => handleTabClick('album')}>
           <FileImageTwoTone twoToneColor="#52c41a" />
           <span>我的相册</span>
-        </div>
-        <Divider />
-        <div className="help" onClick={e => handleTabClick('help')}>
-          <CustomerServiceTwoTone twoToneColor="#C77F43" />
-          <span>客户帮助</span>
         </div>
       </div>
     </RIghtListWrapper>

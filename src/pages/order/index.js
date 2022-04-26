@@ -52,8 +52,7 @@ const About = memo(() => {
     const res = await handleOrderReq(2, id)
     if (res.code === 200) {
       notification.success({
-        message: '已同意该约拍',
-        description: '请及时参加'
+        message: '已取消该约拍'
       })
       dispatch(getOrderListAction(0)) // 客户
       dispatch(getOrderListAction(1)) // 摄影师

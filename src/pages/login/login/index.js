@@ -25,6 +25,8 @@ const Login = memo(() => {
       window.localStorage.setItem('token', JSON.stringify(obj))
       history.push('/home')
       window.location.reload()
+    } else if (res.code === 40201) {
+      message.error('您已被封号~')
     } else {
       message.error('用户名或密码错误~')
     }
