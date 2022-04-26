@@ -33,6 +33,9 @@ export const AlbumWrapper = styled.div`
         cursor: pointer;
       }
     }
+    .delete {
+      cursor: pointer;
+    }
     .like {
       .text {
         cursor: pointer;
