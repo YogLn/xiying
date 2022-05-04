@@ -7,9 +7,6 @@ export const UserWrapper = styled.div`
   .info {
     position: relative;
     display: flex;
-    margin: 10px 0 20px;
-    border: 1px solid #ccc;
-
     .left {
       width: 12%;
       margin-right: 30px;
