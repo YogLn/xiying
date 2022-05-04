@@ -42,9 +42,16 @@ export function addWorkRequest(data) {
     data
   })
 }
+
 export function deleteWorkRequest(rankWorkId) {
   return request({
     url: `/rank/${rankWorkId}`,
     method: 'DELETE'
+  })
+}
+
+export function getUserWorkByIdRequest(userId) {
+  return request({
+    url: `/rank/work/list/${userId}`
   })
 }

@@ -112,4 +112,36 @@ export const UserWrapper = styled.div`
       margin: 20px;
     }
   }
+  .rank-list {
+    display: flex;
+  }
+  .remark {
+    padding: 0 15%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #f5f5f5;
+    margin-top: 10px;
+    .remark-left {
+      display: flex;
+      align-items: center;
+      .user {
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+        .username {
+          font-size: 18px;
+          font-weight: bold;
+          margin-left: 5px;
+        }
+      }
+      .content {
+        margin-left: 10px;
+        font-size: 18px;
+        color: #666;
+      }
+    }
+  }
 `

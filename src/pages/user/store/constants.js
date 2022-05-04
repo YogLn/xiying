@@ -1,3 +1,5 @@
 export const CHANGE_POST_LIST = 'change-post-list'
 export const CHANGE_ALBUM_LIST = 'change-album-list'
 export const CHANGE_USER_INFO = 'change-user-info'
+export const CHANGE_REMARK_LIST = 'change-remark-list'
+export const CHANGE_USER_WORK_LIST = 'change-user-work-list'

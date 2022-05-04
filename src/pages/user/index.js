@@ -13,14 +13,19 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 
 import { Tabs } from 'antd'
 import PostBox from '@/components/post-box'
+import RankAlbum from '@/components/rankAlbum'
 import Album from '@/components/album2'
 import {
   getPostListByIdAction,
   getUserAlbumAction,
-  getUserInfoAction
+  getUserInfoAction,
+  getRemarkListAction,
+  getUserWorkListAction
 } from './store/actionCreators'
 import { addOrderRequest } from '@/services/order'
 import { chargeReq } from '@/services/user'
+import { formatUtcString } from '@/utils/format'
+import { putWorkLikeRequest } from '@/services/rank'
 import { UserWrapper } from './style'
 
 const UserInfo = memo(props => {
@@ -43,16 +48,21 @@ const UserInfo = memo(props => {
     dispatch(getPostListByIdAction(userId))
     dispatch(getUserInfoAction(userId))
     dispatch(getUserAlbumAction(userId))
+    dispatch(getRemarkListAction(userId))
+    dispatch(getUserWorkListAction(userId))
   }, [userId, dispatch])
 
-  const { userInfo, postList, albumList } = useSelector(
-    state => ({
-      userInfo: state.getIn(['user', 'userInfo']),
-      postList: state.getIn(['user', 'postList']),
-      albumList: state.getIn(['user', 'albumList'])
-    }),
-    shallowEqual
-  )
+  const { userInfo, postList, albumList, remarkList, userWorkList } =
+    useSelector(
+      state => ({
+        userInfo: state.getIn(['user', 'userInfo']),
+        postList: state.getIn(['user', 'postList']),
+        albumList: state.getIn(['user', 'albumList']),
+        remarkList: state.getIn(['user', 'remarkList']),
+        userWorkList: state.getIn(['user', 'userWorkList'])
+      }),
+      shallowEqual
+    )
   const handleMessage = () => {
     const token = window.localStorage.getItem('token')
     if (!token) {
@@ -127,6 +137,11 @@ const UserInfo = memo(props => {
       setChargeVisible(false)
     }
   }
+  //点赞
+  const handleLikeClick = async rankId => {
+    await putWorkLikeRequest(rankId)
+    dispatch(getUserWorkListAction(userId))
+  }
 
   return (
     <UserWrapper>
@@ -186,6 +201,35 @@ const UserInfo = memo(props => {
               })
             )}
           </div>
+        </TabPane>
+        <TabPane tab="TA的作品" key="3">
+          <div className="rank-list">
+            {userWorkList.map(item => {
+              return (
+                <RankAlbum
+                  content={item}
+                  handleLike={handleLikeClick}
+                  key={item.rankWorkId}
+                />
+              )
+            })}
+          </div>
+        </TabPane>
+        <TabPane tab="TA的评价" key="4">
+          {remarkList.map(item => {
+            return (
+              <div className="remark" key={item.appointComment}>
+                <div className="remark-left">
+                  <div className="user">
+                    <img src={item?.userVo?.avatar} alt="" />
+                    <div className="username">{item?.userVo?.username}</div>
+                  </div>
+                  <div className="content">评价说：{item?.appointComment}</div>
+                </div>
+                <div className="time">{formatUtcString(item?.commentTime)}</div>
+              </div>
+            )
+          })}
         </TabPane>
       </Tabs>
       <Modal

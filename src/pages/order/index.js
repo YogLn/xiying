@@ -1,6 +1,6 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
-import { Tabs, Table, Tag, Button, notification } from 'antd'
+import { Tabs, Table, Tag, Button, notification, Modal, Input } from 'antd'
 import { getOrderListAction, getProductListAction } from './store/actionCreator'
 import {
   handleOrderReq,
@@ -8,11 +8,16 @@ import {
   handleCompleteOrderReq
 } from '@/services/order'
 import { formatUtcString } from '@/utils/format'
+import { addCommentRequest } from '@/services/comment'
 import { OrderWrapper } from './style'
 
 const About = memo(() => {
   const dispatch = useDispatch()
   const { TabPane } = Tabs
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [commentValue, setCommentValue] = useState('')
+  const [orderId, setOrderId] = useState(0)
+  const { TextArea } = Input
   useEffect(() => {
     dispatch(getOrderListAction(0)) // 客户
     dispatch(getOrderListAction(1)) // 摄影师
@@ -56,6 +61,22 @@ const About = memo(() => {
       })
       dispatch(getOrderListAction(0)) // 客户
       dispatch(getOrderListAction(1)) // 摄影师
+    }
+  }
+  const showModal = ({ id }) => {
+    setIsModalVisible(true)
+    setOrderId(id)
+  }
+  const handleOk = async () => {
+    const res = await addCommentRequest({
+      orderId: orderId,
+      comment: commentValue
+    })
+    if (res.code === 200) {
+      notification.success({
+        message: '评价成功'
+      })
+      setIsModalVisible(false)
     }
   }
   const handleAgree = async ({ id }) => {
@@ -138,6 +159,12 @@ const About = memo(() => {
               </Button>
             </div>
           )
+        } else if (text.orderState === 2) {
+          return (
+            <span className="comment" onClick={() => showModal(text)}>
+              评价
+            </span>
+          )
         } else {
           return <span>订单结束</span>
         }
@@ -188,19 +215,19 @@ const About = memo(() => {
     },
     {
       title: '订单状态',
-      dataIndex: 'orderState',
-      key: 'orderState',
-      render: orderState => {
-        if (orderState === 0) return <Tag color="#2db7f5">进行中</Tag>
-        else if (orderState === 1) return <Tag color="#f50">已取消</Tag>
-        else return <Tag color="#87d068">已完成</Tag>
+      dataIndex: 'isAccepted',
+      key: 'isAccepted',
+      render: isAccepted => {
+        if (isAccepted === 0) return <Tag color="#2db7f5">待处理</Tag>
+        else if (isAccepted === 1) return <Tag color="#87d068">已同意</Tag>
+        else return <Tag color="#f50">已拒绝</Tag>
       }
     },
     {
       title: '操作',
       key: 'action',
       render: text => {
-        if (text.orderState === 0) {
+        if (text.isAccepted === 0) {
           return (
             <div>
               <Button type="link" onClick={() => handleAgree(text)}>
@@ -212,7 +239,7 @@ const About = memo(() => {
             </div>
           )
         } else {
-          return <span>订单完成</span>
+          return <span>订单结束</span>
         }
       }
     }
@@ -284,6 +311,18 @@ const About = memo(() => {
           />
         </TabPane>
       </Tabs>
+      <Modal
+        title="评价内容"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={() => setIsModalVisible(false)}
+      >
+        <TextArea
+          rows={4}
+          placeholder="评价内容"
+          onChange={e => setCommentValue(e.target.value)}
+        />
+      </Modal>
     </OrderWrapper>
   )
 })

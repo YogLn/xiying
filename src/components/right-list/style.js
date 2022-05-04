@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const RIghtListWrapper = styled.div`
   position: fixed;
-  padding: 10px 15px 10px 10px;
+  padding: 10px 15px 20px 10px;
   border: 1px solid #ccc;
   .not-login {
     height: 30px;

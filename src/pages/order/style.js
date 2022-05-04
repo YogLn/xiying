@@ -6,4 +6,7 @@ export const OrderWrapper = styled.div`
     width: 60px;
     height: 60px;
   }
+  .comment {
+    cursor: pointer;
+  }
 `

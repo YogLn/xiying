@@ -45,6 +45,10 @@ export const DetailWrapper = styled.div`
     .banner {
       width: 50%;
       background-color: #e0e0e0;
+
+      img {
+        object-fit: cover;
+      }
     }
     .buy {
       width: 45%;
