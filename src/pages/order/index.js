@@ -239,7 +239,8 @@ const About = memo(() => {
             </div>
           )
         } else {
-          return <span>订单结束</span>
+          if (text.isAccepted === 1) return <Tag color="#87d068">已同意</Tag>
+          else return <Tag color="#f50">已拒绝</Tag>
         }
       }
     }
